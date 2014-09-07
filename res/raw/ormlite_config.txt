@@ -1,0 +1,90 @@
+#
+# generated on 2014/09/07 05:40:14
+#
+# --table-start--
+dataClass=com.alvaroy.promediouninorte.database.Grade
+tableName=grade
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=percentage
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=grade
+# --field-end--
+# --field-start--
+fieldName=stusub
+canBeNull=false
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.alvaroy.promediouninorte.database.Student
+tableName=student
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=user
+canBeNull=false
+unique=true
+# --field-end--
+# --field-start--
+fieldName=cumulative_grade
+# --field-end--
+# --field-start--
+fieldName=total_credits
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.alvaroy.promediouninorte.database.StudentSubject
+tableName=studentsubject
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=student
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=subject
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.alvaroy.promediouninorte.database.Subject
+tableName=subject
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+canBeNull=false
+unique=true
+# --field-end--
+# --field-start--
+fieldName=definite_grade
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
