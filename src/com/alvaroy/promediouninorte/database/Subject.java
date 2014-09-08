@@ -9,9 +9,6 @@ public class Subject {
 	
 	@DatabaseField(unique = true, canBeNull = false)
 	private String name;
-	
-	@DatabaseField
-	private double definite_grade;
 
 	public Subject() {
 	}
@@ -26,14 +23,6 @@ public class Subject {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public double getDefinite_grade() {
-		return definite_grade;
-	}
-
-	public void setDefinite_grade(double definite_grade) {
-		this.definite_grade = definite_grade;
 	}
 
 	public int getId() {

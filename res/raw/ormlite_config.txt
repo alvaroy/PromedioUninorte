@@ -1,5 +1,5 @@
 #
-# generated on 2014/09/07 05:40:14
+# generated on 2014/09/07 11:43:23
 #
 # --table-start--
 dataClass=com.alvaroy.promediouninorte.database.Grade
@@ -66,6 +66,9 @@ foreign=true
 fieldName=subject
 foreign=true
 # --field-end--
+# --field-start--
+fieldName=subject_grade
+# --field-end--
 # --table-fields-end--
 # --table-end--
 #################################
@@ -81,9 +84,6 @@ generatedId=true
 fieldName=name
 canBeNull=false
 unique=true
-# --field-end--
-# --field-start--
-fieldName=definite_grade
 # --field-end--
 # --table-fields-end--
 # --table-end--

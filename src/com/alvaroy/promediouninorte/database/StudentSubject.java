@@ -12,6 +12,9 @@ public class StudentSubject {
 	
 	@DatabaseField(foreign = true)
 	private Subject subject;
+	
+	@DatabaseField
+	private double subject_grade;
 
 	public StudentSubject() {
 	}
@@ -33,4 +36,12 @@ public class StudentSubject {
 		return subject;
 	}
 
+	public double getSubject_grade() {
+		return subject_grade;
+	}
+
+	public void setSubject_grade(double subject_grade) {
+		this.subject_grade = subject_grade;
+	}
+	
 }
