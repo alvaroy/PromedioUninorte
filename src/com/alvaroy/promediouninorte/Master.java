@@ -76,7 +76,7 @@ public class Master extends Fragment {
 				final EditText input = (EditText) promptView.findViewById(R.id.studentEditText);
 				alertDialogBuilder
 				.setCancelable(false)
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
 								if(!list.contains(input.getText().toString())) {
 									DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
@@ -93,7 +93,7 @@ public class Master extends Fragment {
 								}
 							}
 						})
-				.setNegativeButton("Cancel",
+				.setNegativeButton("Cancelar",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,	int id) {
 								dialog.cancel();

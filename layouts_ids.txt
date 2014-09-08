@@ -18,9 +18,15 @@ pm_master
 calc_subject_button
 add_subject_button
 
-pa_ingdatos
+pa_calcular
 cum_avg_txtview
 des_avg_txtview
 des_avg_edittxt
-ingdatos_calculate_button
+calcular_calculate_button
 
+pa_ingdatos
+credits_completed_txtview
+credits_completed_edit
+cum_avg_dots_txtview
+cum_avg_edit
+ing_datos_button

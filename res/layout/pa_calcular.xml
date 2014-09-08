@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="90dp"
-        android:text="@string/cum_avg_dots"
+        android:text="@string/actual_avg"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/ingdatos_calculate_button"
+        android:id="@+id/calcular_calculate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
