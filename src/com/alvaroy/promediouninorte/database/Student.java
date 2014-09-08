@@ -34,5 +34,21 @@ public class Student {
 	public int getId() {
 		return id;
 	}
+
+	public double getCumulative_grade() {
+		return cumulative_grade;
+	}
+
+	public void setCumulative_grade(double cumulative_grade) {
+		this.cumulative_grade = cumulative_grade;
+	}
+
+	public int getTotal_credits() {
+		return total_credits;
+	}
+
+	public void setTotal_credits(int total_credits) {
+		this.total_credits = total_credits;
+	}
 	
 }
