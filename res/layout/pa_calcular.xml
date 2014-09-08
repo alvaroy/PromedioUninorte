@@ -38,9 +38,9 @@
         android:id="@+id/calcular_calculate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/des_avg_edittxt"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="120dp"
         android:text="@string/calc" />
 
 </RelativeLayout>
