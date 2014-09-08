@@ -22,6 +22,7 @@ public class StudentSubject {
 	public StudentSubject(Student student, Subject subject) {
 		this.student = student;
 		this.subject = subject;
+		this.subject_grade = -1.0;
 	}
 
 	public int getId() {

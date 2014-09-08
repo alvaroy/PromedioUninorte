@@ -9,12 +9,16 @@ public class Subject {
 	
 	@DatabaseField(unique = true, canBeNull = false)
 	private String name;
+	
+	@DatabaseField(canBeNull = false)
+	private int credits;
 
 	public Subject() {
 	}
 
-	public Subject(String name) {
+	public Subject(String name, int credits) {
 		this.name = name;
+		this.credits = credits;
 	}
 
 	public String getName() {
@@ -27,6 +31,14 @@ public class Subject {
 
 	public int getId() {
 		return id;
+	}
+
+	public int getCredits() {
+		return credits;
+	}
+
+	public void setCredits(int credits) {
+		this.credits = credits;
 	}
 	
 }
