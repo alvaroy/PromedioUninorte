@@ -2,6 +2,29 @@
 <resources>
 
     <string name="app_name">PromedioUninorte</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="add_student">Add Student</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="cum_avg_dots">Cumulative Average: </string>
+    <string name="sem_avg">Semester Average</string>
+    <string name="calc_avg">Calculate Average</string>
+    <string name="ins_data">Insert Data</string>
+    <string name="calc">Calculate</string>
+    <string name="save">Save</string>
+    <string name="calc_subject_grade">Calculate Subject Grade</string>
+    <string name="ins_new_subject">Add New Subject</string>
+    <string name="calc_grade">Calculate Grade</string>
+    <string name="edit_grade">Edit Grade</string>
+    <string name="del_subject">Delete Subject</string>
+    <string name="actual_avg">Actual Average: </string>
+    <string name="desired_avg">Desired Average: </string>
+    <string name="num_credits_done">Number of Credits Completed: </string>
+    <string name="cum_avg">Cumulative Average</string>
+    <string name="final_grade">Desired Final Grade: </string>
+    <string name="credits_comp">Number of Completed Credits: </string>
+    <string name="total_grades">Number of Grades: </string>
+    <string name="subject_credits">Subject Credit Number: </string>
+    <string name="num_grades">Amount of Grades : </string>
+    <string name="name_subject">Subject Name: </string>
 
 </resources>
