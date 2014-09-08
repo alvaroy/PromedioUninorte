@@ -26,5 +26,6 @@
     <string name="subject_credits">Subject Credit Number: </string>
     <string name="num_grades">Amount of Grades : </string>
     <string name="name_subject">Subject Name: </string>
+    <string name="ins_user">Student Username:</string>
 
 </resources>

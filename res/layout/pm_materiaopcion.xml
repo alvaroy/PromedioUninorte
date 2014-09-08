@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pm_materiaopcion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/add_student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -15,11 +14,11 @@
         android:text="@string/calc_grade" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/sem_avg_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button1"
+        android:layout_below="@+id/add_student"
         android:layout_marginTop="80dp"
         android:text="@string/edit_grade" />
 
@@ -27,7 +26,7 @@
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/sem_avg_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="78dp"
         android:text="@string/del_subject" />
