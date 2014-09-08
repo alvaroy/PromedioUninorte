@@ -21,6 +21,8 @@ public class Student {
 	
 	public Student(String user) {
 		this.user = user;
+		this.cumulative_grade = -1.0;
+		this.total_credits = -1;
 	}
 
 	public String getUser() {
@@ -29,8 +31,6 @@ public class Student {
 
 	public void setUser(String user) {
 		this.user = user;
-		this.cumulative_grade = -1.0;
-		this.total_credits = -1;
 	}
 
 	public int getId() {

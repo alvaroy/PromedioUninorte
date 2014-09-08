@@ -26,6 +26,7 @@ public class Grade {
 		this.name = name;
 		this.percentage = percentage;
 		this.stusub = stusub;
+		this.grade = -1.0;
 	}
 
 	public String getName() {

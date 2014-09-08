@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:layout_height="match_parent" >
+    
     <TextView
-        android:id="@+id/ins_username"
+        android:id="@+id/cum_avg_txtview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="112dp"
-        android:text="@string/actual_avg"
+        android:layout_marginTop="90dp"
+        android:text="@string/cum_avg_dots"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/des_avg_txtview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ins_username"
-        android:layout_below="@+id/ins_username"
-        android:layout_marginTop="33dp"
+        android:layout_alignLeft="@+id/cum_avg_txtview"
+        android:layout_below="@+id/cum_avg_txtview"
+        android:layout_marginTop="20dp"
         android:text="@string/desired_avg"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/studentEditText"
+        android:id="@+id/des_avg_edittxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/des_avg_txtview"
+        android:layout_below="@+id/des_avg_txtview"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
+        android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/add_student"
+        android:id="@+id/ingdatos_calculate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_marginBottom="84dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
         android:text="@string/calc" />
 
 </RelativeLayout>

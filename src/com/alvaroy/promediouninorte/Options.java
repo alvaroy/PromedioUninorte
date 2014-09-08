@@ -13,7 +13,6 @@ public class Options extends Fragment {
 	
 	Button cumAvg;
 	Button cumSem;
-	String username;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -22,17 +21,13 @@ public class Options extends Fragment {
 		//Setting up fragment
 		View rootView = inflater.inflate(R.layout.opciones, container, false);
 		
-		//Get Username
-		username = getArguments().getString("Username");
-		
 		//Cumulative Average Button and method
 		cumAvg = (Button) rootView.findViewById(R.id.cum_avg_button);
 		cumAvg.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Bundle args = new Bundle();
-				args.putString("Username", username);
+				Bundle args = getArguments();
 				PA_Master pa_master = new PA_Master();
 				pa_master.setArguments(args);
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -47,8 +42,7 @@ public class Options extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Bundle args = new Bundle();
-				args.putString("Username", username);
+				Bundle args = getArguments();
 				PM_Master pm_master = new PM_Master();
 				pm_master.setArguments(args);
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();

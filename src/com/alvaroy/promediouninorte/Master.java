@@ -65,7 +65,7 @@ public class Master extends Fragment {
 		});
 		
 		//Button method
-		button = (Button) rootView.findViewById(R.id.add_student);		
+		button = (Button) rootView.findViewById(R.id.add_student_button);		
 		button.setOnClickListener(new OnClickListener() {		
 			
 			public void onClick(View v) {

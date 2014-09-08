@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/ins_username"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="112dp"
-        android:text="@string/num_credits_done"
+        android:layout_marginTop="90dp"
+        android:text="@string/credits_comp"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/studentEditText"
+        android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ins_username"
-        android:layout_below="@+id/ins_username"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:inputType="numberDecimal" >
+        android:inputType="number" >
 
         <requestFocus />
     </EditText>
@@ -32,8 +31,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/studentEditText"
-        android:layout_below="@+id/studentEditText"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText1"
         android:layout_marginTop="20dp"
         android:text="@string/cum_avg_dots"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -49,12 +48,12 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/add_student"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/save" />
 
 </RelativeLayout>
