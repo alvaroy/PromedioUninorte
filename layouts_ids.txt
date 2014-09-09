@@ -30,3 +30,12 @@ credits_completed_edit
 cum_avg_dots_txtview
 cum_avg_edit
 ing_datos_button
+
+pm_inssubject
+mat_name_edit
+mat_name_txt
+credits_done_edit
+credits_done_txt
+grades_totel_edit
+grades_total_txt
+pm_inssubject_button
