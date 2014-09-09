@@ -4,7 +4,6 @@ import com.alvaroy.promediouninorte.database.DatabaseHelper;
 import com.alvaroy.promediouninorte.database.Student;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
