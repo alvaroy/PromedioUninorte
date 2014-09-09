@@ -36,6 +36,7 @@ public class PM_Master extends Fragment {
 		Student student = studentDAO.queryForEq("user", getArguments().getString("Username")).get(0);
 		RuntimeExceptionDao<StudentSubject, Integer> stusubDAO = helper.getStusubRuntimeDAO();
 		List<StudentSubject> total_subjects = stusubDAO.queryForEq("student_id", student.getId());
+		OpenHelperManager.releaseHelper();		
 		if(total_subjects.isEmpty()) {
 			calc.setEnabled(false);
 		}

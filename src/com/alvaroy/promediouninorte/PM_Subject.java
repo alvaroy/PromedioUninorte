@@ -11,6 +11,7 @@ public class PM_Subject extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
+		//Setup fragment for usage
 		View rootView = inflater.inflate(R.layout.pm_subject, container, false);
 		return rootView;
 	}

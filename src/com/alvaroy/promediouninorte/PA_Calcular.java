@@ -37,6 +37,7 @@ public class PA_Calcular extends Fragment {
 		DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
 		RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
 		Student student = studentDAO.queryForEq("user", getArguments().getString("Username")).get(0);
+		OpenHelperManager.releaseHelper();
 		
 		//Set average for view
 		txt.setText(txt.getText().toString() + student.getCumulative_grade());
