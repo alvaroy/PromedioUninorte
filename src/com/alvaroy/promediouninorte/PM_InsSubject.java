@@ -43,10 +43,13 @@ public class PM_InsSubject extends Fragment {
 				String gradestxt = grades.getText().toString();
 				if(!nametxt.isEmpty() && !creditstxt.isEmpty() && !gradestxt.isEmpty()) {
 					try {
-						Subject subject = new Subject(nametxt, Integer.parseInt(creditstxt), Integer.parseInt(gradestxt));
 						DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
 						RuntimeExceptionDao<Subject, Integer> subjectDAO = helper.getSubjectRuntimeDAO();
-						subjectDAO.create(subject);
+						Subject subject = new Subject(nametxt, Integer.parseInt(creditstxt), Integer.parseInt(gradestxt));	
+						if(subjectDAO.queryForMatching(subject).isEmpty()) {
+							subjectDAO.create(subject);
+						}	
+						
 						OpenHelperManager.releaseHelper();
 						getActivity().getSupportFragmentManager().popBackStack();
 					}
