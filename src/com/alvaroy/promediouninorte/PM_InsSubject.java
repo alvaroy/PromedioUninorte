@@ -1,9 +1,15 @@
 package com.alvaroy.promediouninorte;
 
+import java.sql.SQLException;
+
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
+import com.alvaroy.promediouninorte.database.Student;
+import com.alvaroy.promediouninorte.database.StudentSubject;
 import com.alvaroy.promediouninorte.database.Subject;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -44,17 +50,34 @@ public class PM_InsSubject extends Fragment {
 				if(!nametxt.isEmpty() && !creditstxt.isEmpty() && !gradestxt.isEmpty()) {
 					try {
 						DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
+						RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
 						RuntimeExceptionDao<Subject, Integer> subjectDAO = helper.getSubjectRuntimeDAO();
+						RuntimeExceptionDao<StudentSubject, Integer> stusubDAO = helper.getStusubRuntimeDAO();
 						Subject subject = new Subject(nametxt, Integer.parseInt(creditstxt), Integer.parseInt(gradestxt));	
 						if(subjectDAO.queryForMatching(subject).isEmpty()) {
 							subjectDAO.create(subject);
 						}	
-						
-						OpenHelperManager.releaseHelper();
-						getActivity().getSupportFragmentManager().popBackStack();
+						StudentSubject stusub = new StudentSubject(
+								/*Student*/studentDAO.queryForEq("user", getArguments().getString("Username")).get(0)
+								/*Subject*/,subjectDAO.queryForMatching(subject).get(0));
+						Where<StudentSubject,Integer> query = stusubDAO.queryBuilder().where().eq("student_id", stusub.getStudent().getId()).and()
+							.eq("subject_id", stusub.getSubject().getId());
+						if(stusubDAO.query(query.prepare()).isEmpty()) {
+							stusubDAO.create(stusub);
+							OpenHelperManager.releaseHelper();
+							getActivity().getSupportFragmentManager().popBackStack();
+						} 
+						else {
+							Toast.makeText(rootView.getContext(), "Ya tiene esta materia registrada", Toast.LENGTH_SHORT).show();
+							OpenHelperManager.releaseHelper();
+						}
 					}
 					catch (NumberFormatException e) {
 						Toast.makeText(rootView.getContext(), "Los numeros no son validos", Toast.LENGTH_SHORT).show();
+						OpenHelperManager.releaseHelper();
+					}
+					catch (SQLException s) {
+						OpenHelperManager.releaseHelper();
 					}
 				}
 				else {
