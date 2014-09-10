@@ -44,9 +44,9 @@ public class PM_Subject extends Fragment {
 		RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
 		RuntimeExceptionDao<Subject, Integer> subjectDAO = helper.getSubjectRuntimeDAO();
 		RuntimeExceptionDao<StudentSubject, Integer> stusubDAO = helper.getStusubRuntimeDAO();
-		List<StudentSubject> names = stusubDAO.queryForEq("student_id", studentDAO.queryForEq("user", getArguments().getString("Username")));
+		List<StudentSubject> names = stusubDAO.queryForEq("student_id", studentDAO.queryForEq("user", getArguments().getString("Username")).get(0).getId());
 		for (StudentSubject stusub : names) {
-			list.add(String.valueOf(stusub.getSubject().getId()));
+			list.add(subjectDAO.queryForId(stusub.getSubject().getId()).getName());
 		}
 		return list;
 	}
