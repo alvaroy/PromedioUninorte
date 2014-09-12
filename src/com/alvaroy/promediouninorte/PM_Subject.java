@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class PM_Subject extends Fragment {
 	
@@ -67,7 +66,7 @@ public class PM_Subject extends Fragment {
 		List<StudentSubject> names = stusubDAO.queryForEq("student_id", studentDAO.queryForEq("user", getArguments().getString("Username")).get(0).getId());
 		for (StudentSubject stusub : names) {
 			list.add(subjectDAO.queryForId(stusub.getSubject().getId()).getName());
-			ids.add(stusub.getSubject().getId());			
+			ids.add(stusub.getId());			
 		}
 		OpenHelperManager.releaseHelper();
 		return list;

@@ -26,5 +26,6 @@
     <string name="num_grades">Numero de Notas : </string>
     <string name="name_subject">Nombre de la Materia: </string>
     <string name="ins_user">Usuario del Estudiante:</string>
+    <string name="del_subject_txt">¿Esta seguro que desea eliminar esta materia?</string>
 
 </resources>
