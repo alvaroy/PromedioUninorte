@@ -22,6 +22,7 @@
         android:layout_below="@+id/credits_completed_txtview"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:imeOptions="flagNoFullscreen"
         android:inputType="number" >
 
         <requestFocus />
@@ -45,6 +46,7 @@
         android:layout_below="@+id/cum_avg_dots_txtview"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:imeOptions="flagNoFullscreen"
         android:inputType="numberDecimal" />
 
     <Button

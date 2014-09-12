@@ -13,6 +13,7 @@
         android:layout_below="@+id/mat_name_txt"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:imeOptions="flagNoFullscreen"
         android:inputType="text" >
 
         <requestFocus />
@@ -25,7 +26,7 @@
         android:layout_alignLeft="@+id/mat_name_edit"
         android:layout_below="@+id/mat_name_edit"
         android:layout_marginTop="20dp"
-        android:text="@string/num_credits_done"
+        android:text="@string/subject_credits"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -36,6 +37,7 @@
         android:layout_below="@+id/credits_done_txt"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:imeOptions="flagNoFullscreen"
         android:inputType="number" />
 
     <TextView
@@ -56,6 +58,7 @@
         android:layout_below="@+id/grades_total_txt"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:imeOptions="flagNoFullscreen"
         android:inputType="number" />
 
     <TextView
