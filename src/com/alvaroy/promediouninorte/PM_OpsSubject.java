@@ -1,6 +1,7 @@
 package com.alvaroy.promediouninorte;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
 import com.alvaroy.promediouninorte.database.Grade;
@@ -42,20 +43,11 @@ public class PM_OpsSubject extends Fragment {
 		
 		//Check if calculate button should be enabled
 		DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
-		RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
-		RuntimeExceptionDao<Subject, Integer> subjectDAO = helper.getSubjectRuntimeDAO();
 		RuntimeExceptionDao<StudentSubject, Integer> stusubDAO = helper.getStusubRuntimeDAO();
 		RuntimeExceptionDao<Grade, Integer> gradeDAO = helper.getGradeRuntimeDAO();
-		Student student = studentDAO.queryForEq("user", getArguments().getString("Username")).get(0);
-		try {
-			Where<StudentSubject, Integer> query = stusubDAO.queryBuilder().where().eq("student_id", student).and().eq("subject_id", subjectDAO.queryForId(getArguments().getInt("ID")));
-			if(gradeDAO.queryForEq("stusub_id", stusubDAO.query(query.prepare()).get(0)).isEmpty()) {				
-				calc.setEnabled(false);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+		if(gradeDAO.queryForEq("stusub_id", stusubDAO.queryForId(getArguments().getInt("ID"))).isEmpty())
+		calc.setEnabled(false);
+		OpenHelperManager.releaseHelper();
 		
 		//Calculate grade button method
 		calc.setOnClickListener(new OnClickListener() {
@@ -98,6 +90,11 @@ public class PM_OpsSubject extends Fragment {
 							public void onClick(DialogInterface dialog, int id) {
 								DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
 								RuntimeExceptionDao<StudentSubject, Integer> stusub = helper.getStusubRuntimeDAO();
+								RuntimeExceptionDao<Grade, Integer> gradeDAO = helper.getGradeRuntimeDAO();
+								List<Grade> grades = gradeDAO.queryForEq("stusub_id", getArguments().getInt("ID"));
+								if(!grades.isEmpty()) {
+									gradeDAO.delete(grades);
+								}
 								stusub.deleteById(getArguments().getInt("ID"));
 								OpenHelperManager.releaseHelper();
 								getActivity().getSupportFragmentManager().popBackStack();

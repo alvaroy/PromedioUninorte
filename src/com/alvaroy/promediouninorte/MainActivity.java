@@ -13,4 +13,5 @@ public class MainActivity extends ActionBarActivity {
 					.add(R.id.main, new Master()).commit();
 		}
 	}
+	
 }
