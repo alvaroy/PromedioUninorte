@@ -1,18 +1,11 @@
 package com.alvaroy.promediouninorte;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
 import com.alvaroy.promediouninorte.database.Grade;
-import com.alvaroy.promediouninorte.database.Student;
 import com.alvaroy.promediouninorte.database.StudentSubject;
-import com.alvaroy.promediouninorte.database.Subject;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-import com.j256.ormlite.stmt.PreparedQuery;
-import com.j256.ormlite.stmt.QueryBuilder;
-import com.j256.ormlite.stmt.Where;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

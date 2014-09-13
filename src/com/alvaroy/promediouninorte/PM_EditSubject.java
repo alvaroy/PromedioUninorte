@@ -1,24 +1,17 @@
 package com.alvaroy.promediouninorte;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
 import com.alvaroy.promediouninorte.database.Grade;
-import com.alvaroy.promediouninorte.database.Student;
 import com.alvaroy.promediouninorte.database.StudentSubject;
 import com.alvaroy.promediouninorte.database.Subject;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-import com.j256.ormlite.stmt.Where;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,7 +55,7 @@ public class PM_EditSubject extends Fragment {
 						.getInt("ID"));
 				int err = 0;
 				double total_pct = 0;
-				ArrayList<Double> pctgrade = new ArrayList<Double>();
+				int counter = 0;
 				ArrayList<Grade> grades = new ArrayList<Grade>();
 				// Go over the table
 				for (int i = 1; i < table.getChildCount(); i++) {
@@ -109,14 +102,14 @@ public class PM_EditSubject extends Fragment {
 					sgrade.setId(id);
 					if (grade >= 0.0) {
 						sgrade.setGrade(grade);
-						pctgrade.add(grade);
+						counter += 1;
 					}
 					grades.set(i - 1, sgrade);
 				}
 				if (err == 0) {
 					if (total_pct == 100) {
-						if (pctgrade.size() == grades.size()) {
-							stusub.setSubject_grade(calcAVG(pctgrade, grades));
+						if (counter == grades.size()) {
+							stusub.setSubject_grade(calcAVG(grades));
 							stusubDAO.update(stusub);
 						}
 						for (Grade grade : grades) {
@@ -148,6 +141,9 @@ public class PM_EditSubject extends Fragment {
 							"La nota maxima es 5.0", Toast.LENGTH_SHORT).show();
 				}
 				OpenHelperManager.releaseHelper();
+				if(err == 0) {
+					getActivity().getSupportFragmentManager().popBackStack();
+				}
 			}
 		});
 
@@ -220,6 +216,8 @@ public class PM_EditSubject extends Fragment {
 				}
 			}
 			TableRow tr = new TableRow(rootView.getContext());
+			tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT));
 			tr.addView(name);
 			tr.addView(pct);
 			tr.addView(grade);
@@ -227,10 +225,10 @@ public class PM_EditSubject extends Fragment {
 		}
 	}
 
-	private double calcAVG(ArrayList<Double> grades, ArrayList<Grade> pct) {
+	private double calcAVG(ArrayList<Grade> pct) {
 		double total = 0;
-		for (int i = 0; i < grades.size(); i++) {
-			total += grades.get(i) * (pct.get(i).getPercentage() / 100);
+		for (int i = 0; i < pct.size(); i++) {
+			total += pct.get(i).getGrade() * (pct.get(i).getPercentage() / 100);
 		}
 		return total;
 	}

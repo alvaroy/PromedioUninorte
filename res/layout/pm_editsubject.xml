@@ -25,8 +25,9 @@
         <TableLayout
             android:id="@+id/edit_table"
             android:layout_width="match_parent"
-            android:stretchColumns="*"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:stretchColumns="*" >
+
         </TableLayout>
         
     </ScrollView>
