@@ -1,9 +1,18 @@
 package com.alvaroy.promediouninorte;
 
+import java.sql.SQLException;
+
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
+import com.alvaroy.promediouninorte.database.Grade;
+import com.alvaroy.promediouninorte.database.Student;
 import com.alvaroy.promediouninorte.database.StudentSubject;
+import com.alvaroy.promediouninorte.database.Subject;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.stmt.PreparedQuery;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -21,7 +30,7 @@ public class PM_OpsSubject extends Fragment {
 	Button edit;
 	Button del;
 	View rootView;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +39,23 @@ public class PM_OpsSubject extends Fragment {
 		calc = (Button) rootView.findViewById(R.id.opssubject_calc_grade);
 		edit = (Button) rootView.findViewById(R.id.opsubject_edit_grade);
 		del = (Button) rootView.findViewById(R.id.opsubject_del_subject);
+		
+		//Check if calculate button should be enabled
+		DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
+		RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
+		RuntimeExceptionDao<Subject, Integer> subjectDAO = helper.getSubjectRuntimeDAO();
+		RuntimeExceptionDao<StudentSubject, Integer> stusubDAO = helper.getStusubRuntimeDAO();
+		RuntimeExceptionDao<Grade, Integer> gradeDAO = helper.getGradeRuntimeDAO();
+		Student student = studentDAO.queryForEq("user", getArguments().getString("Username")).get(0);
+		try {
+			Where<StudentSubject, Integer> query = stusubDAO.queryBuilder().where().eq("student_id", student).and().eq("subject_id", subjectDAO.queryForId(getArguments().getInt("ID")));
+			if(gradeDAO.queryForEq("stusub_id", stusubDAO.query(query.prepare()).get(0)).isEmpty()) {				
+				calc.setEnabled(false);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		
 		//Calculate grade button method
 		calc.setOnClickListener(new OnClickListener() {
@@ -90,7 +116,5 @@ public class PM_OpsSubject extends Fragment {
 		
 		return rootView;
 	}
-	
-	
 
 }
