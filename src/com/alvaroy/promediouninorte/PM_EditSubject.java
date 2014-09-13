@@ -111,6 +111,11 @@ public class PM_EditSubject extends Fragment {
 						if (counter == grades.size()) {
 							stusub.setSubject_grade(calcAVG(grades));
 							stusubDAO.update(stusub);
+						} else {
+							if(stusub.getSubject_grade() != -1.0) {
+								stusub.setSubject_grade(-1.0);
+								stusubDAO.update(stusub);
+							}
 						}
 						for (Grade grade : grades) {
 							RuntimeExceptionDao<Grade, Integer> gradeDAO = helper

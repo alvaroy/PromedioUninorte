@@ -39,7 +39,7 @@ public class PA_Calcular extends Fragment {
 		OpenHelperManager.releaseHelper();
 		
 		//Set average for view
-		txt.setText(txt.getText().toString() + student.getCumulative_grade());
+		txt.setText(txt.getText().toString() + " " + student.getCumulative_grade());
 		
 		//Button method
 		calc.setOnClickListener(new OnClickListener() {
@@ -60,8 +60,6 @@ public class PA_Calcular extends Fragment {
 				catch (NumberFormatException e) {				
 					Toast.makeText(rootView.getContext(), "El dato tiene que ser numerico", Toast.LENGTH_SHORT).show();
 				}
-				
-				
 			}
 		});
 		
