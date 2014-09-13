@@ -40,7 +40,7 @@ public class PA_IngDatos extends Fragment {
 					try {
 						int credit = Integer.valueOf(credits.getText().toString());
 						double avg = Double.valueOf(cum_avg.getText().toString());
-						if(credit > 0 && avg >= 0.0 && avg <= 5.0) {
+						if(credit >= 0 && avg >= 0.0 && avg <= 5.0) {
 							DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
 							RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
 							Student student = studentDAO.queryForEq("user", getArguments().getString("Username")).get(0);
