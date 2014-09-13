@@ -15,7 +15,7 @@
     <string name="ins_new_subject">Ingresar Nueva Materia</string>
     <string name="calc_grade">Calcular Nota</string>
     <string name="edit_grade">Editar Notas</string>
-    <string name="del_subject">Eliminar Materia</string>
+    <string name="del_subject">Retirar Materia</string>
     <string name="actual_avg">Promedio Actual: </string>
     <string name="desired_avg">Promedio Deseado: </string>
     <string name="num_credits_done">Numero de creditos cursados:</string>
