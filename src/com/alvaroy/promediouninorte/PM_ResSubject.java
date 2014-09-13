@@ -71,7 +71,7 @@ public class PM_ResSubject extends Fragment {
 				line.addView(txt);
 			//Still possible to get the desired average	
 			} else {
-				double need = calcDes(des, total, pct);
+				double need = (des - total) * 100 / pct;
 				//Calculations don't give a realistic number
 				if (need < 0.0 || need > 5.0) {
 					TextView txt = new TextView(rootView.getContext());
@@ -84,8 +84,7 @@ public class PM_ResSubject extends Fragment {
 				} else {
 					addHeaders();
 					fillRows(grades, need);
-				}
-				
+				}				
 			}
 		}
 		return rootView;
@@ -100,11 +99,15 @@ public class PM_ResSubject extends Fragment {
 		TextView name = new TextView(rootView.getContext());
 		name.setText("Titulo");
 		name.setTextColor(Color.WHITE);
+		name.setTextSize(22);
+		name.setPadding(15, 0, 0, 0);
 		tr_head.addView(name);
 		// Add grade header
 		TextView grade = new TextView(rootView.getContext());
 		grade.setText("Puntaje");
 		grade.setTextColor(Color.WHITE);
+		grade.setTextSize(22);
+		grade.setPadding(15, 0, 0, 0);
 		tr_head.addView(grade);
 		table.addView(tr_head, new TableLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -115,12 +118,16 @@ public class PM_ResSubject extends Fragment {
 			TextView name = new TextView(rootView.getContext());
 			TextView gradetxt = new TextView(rootView.getContext());
 			name.setText(grade.getName());
+			name.setTextSize(20);
+			name.setPadding(15, 0, 0, 0);
 			if(grade.getGrade() == -1.0) {
 				gradetxt.setText(String.valueOf(need));
 				gradetxt.setTextColor(Color.RED);
 			} else {
 				gradetxt.setText(String.valueOf(grade.getGrade()));
 			}
+			gradetxt.setTextSize(20);
+			gradetxt.setPadding(15, 0, 0, 0);
 			TableRow tr = new TableRow(rootView.getContext());
 			tr.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 					LayoutParams.WRAP_CONTENT));
@@ -128,12 +135,6 @@ public class PM_ResSubject extends Fragment {
 			tr.addView(gradetxt);
 			table.addView(tr);
 		}
-	}
-	
-	private double calcDes(double des, double total, double pct) {
-		double need = des - total;
-		need = need * 100 / pct;
-		return need;
 	}
 
 }

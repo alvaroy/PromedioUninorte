@@ -167,16 +167,22 @@ public class PM_EditSubject extends Fragment {
 		TextView name = new TextView(rootView.getContext());
 		name.setText("Titulo");
 		name.setTextColor(Color.WHITE);
+		name.setTextSize(22);
+		name.setPadding(15, 0, 0, 0);
 		tr_head.addView(name);
 		// Add percentage header
 		TextView pct = new TextView(rootView.getContext());
 		pct.setText("Porcentaje");
 		pct.setTextColor(Color.WHITE);
+		pct.setTextSize(22);
+		pct.setPadding(15, 0, 0, 0);
 		tr_head.addView(pct);
 		// Add grade header
 		TextView grade = new TextView(rootView.getContext());
 		grade.setText("Puntaje");
 		grade.setTextColor(Color.WHITE);
+		grade.setTextSize(22);
+		grade.setPadding(15, 0, 0, 0);
 		tr_head.addView(grade);
 		table.addView(tr_head, new TableLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
