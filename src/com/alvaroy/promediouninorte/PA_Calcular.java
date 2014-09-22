@@ -13,56 +13,93 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class PA_Calcular extends Fragment {
-	
-	TextView txt;
+
 	EditText avg;
+	EditText credits;
+	EditText cum_avg;
 	Button calc;
 	View rootView;
-	
+
 	@Override
-	public View onCreateView(LayoutInflater inflater,
-			ViewGroup container, Bundle savedInstanceState) {
-		//Setting up fragment for view
-		rootView = inflater.inflate(R.layout.pa_calcular, container, false);	
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// Setting up fragment for view
+		rootView = inflater.inflate(R.layout.pa_calcular, container, false);
 		calc = (Button) rootView.findViewById(R.id.calcular_calculate_button);
 		avg = (EditText) rootView.findViewById(R.id.des_avg_edittxt);
-		txt = (TextView) rootView.findViewById(R.id.cum_avg_txtview);
-		
-		//Database usage to get average 
-		DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
-		RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
-		Student student = studentDAO.queryForEq("user", getArguments().getString("Username")).get(0);
+		credits = (EditText) rootView.findViewById(R.id.credits_completed_edit);
+		cum_avg = (EditText) rootView.findViewById(R.id.cum_avg_edit);
+
+		// Database usage to get average
+		DatabaseHelper helper = OpenHelperManager.getHelper(
+				rootView.getContext(), DatabaseHelper.class);
+		RuntimeExceptionDao<Student, Integer> studentDAO = helper
+				.getStudentRuntimeDAO();
+		Student student = studentDAO.queryForEq("user",
+				getArguments().getString("Username")).get(0);
 		OpenHelperManager.releaseHelper();
 		
-		//Set average for view
-		txt.setText(txt.getText().toString() + " " + student.getCumulative_grade());
-		
-		//Button method
+		if(student.getCumulative_grade() != -1.0) {
+			credits.setText(String.valueOf(student.getCumulative_grade()));
+			cum_avg.setText(String.valueOf(student.getTotal_credits()));
+		} 
+
+		// Button method
 		calc.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				try {
-					double desired = Double.valueOf(avg.getText().toString());
-					if(desired >= 0.0 && desired <= 5.0) {
-						Bundle args = getArguments();
-						args.putDouble("AVG", desired);
-						PA_ShowRes fragment = new PA_ShowRes();
-						fragment.setArguments(args);
-						FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-						ft.replace(R.id.main, fragment).addToBackStack("PA_Calcular").commit();
-					}					
-				}
-				catch (NumberFormatException e) {				
-					Toast.makeText(rootView.getContext(), "El dato tiene que ser numerico", Toast.LENGTH_SHORT).show();
+				if (!credits.getText().toString().isEmpty()
+						&& !cum_avg.getText().toString().isEmpty()
+						&& !avg.getText().toString().isEmpty()) {
+					try {
+						int credit = Integer.valueOf(credits.getText()
+								.toString());
+						double davg = Double.valueOf(cum_avg.getText()
+								.toString());
+						double desired = Double.valueOf(avg.getText()
+								.toString());
+						if (desired >= 0.0 && desired <= 5.0 && credit >= 0
+								&& davg >= 0.0 && davg <= 5.0) {
+							DatabaseHelper helper = OpenHelperManager
+									.getHelper(rootView.getContext(),
+											DatabaseHelper.class);
+							RuntimeExceptionDao<Student, Integer> studentDAO = helper
+									.getStudentRuntimeDAO();
+							Student student = studentDAO.queryForEq("user",
+									getArguments().getString("Username"))
+									.get(0);
+							student.setCumulative_grade(davg);
+							student.setTotal_credits(credit);
+							studentDAO.update(student);
+							OpenHelperManager.releaseHelper();
+							Bundle args = getArguments();
+							args.putDouble("AVG", desired);
+							PA_ShowRes fragment = new PA_ShowRes();
+							fragment.setArguments(args);
+							FragmentTransaction ft = getActivity()
+									.getSupportFragmentManager()
+									.beginTransaction();
+							ft.replace(R.id.main, fragment)
+									.addToBackStack("PA_Calcular").commit();
+						}
+					} catch (NumberFormatException e) {
+						Toast.makeText(rootView.getContext(),
+								"El dato tiene que ser numerico",
+								Toast.LENGTH_SHORT).show();
+					}
+				} else {
+					Toast.makeText(rootView.getContext(),
+							"Llene todos los campos", Toast.LENGTH_SHORT)
+							.show();
 				}
 			}
 		});
-		
+
 		return rootView;
 	}
+
 }

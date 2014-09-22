@@ -2,28 +2,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    
-    <TextView
-        android:id="@+id/cum_avg_txtview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="90dp"
-        android:text="@string/actual_avg"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/des_avg_txtview"
+    <EditText
+        android:id="@+id/credits_completed_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/cum_avg_txtview"
-        android:layout_below="@+id/cum_avg_txtview"
+        android:layout_alignLeft="@+id/credits_completed_txtview"
+        android:layout_below="@+id/credits_completed_txtview"
         android:layout_marginTop="20dp"
-        android:text="@string/desired_avg"
+        android:ems="10"
+        android:imeOptions="flagNoFullscreen"
+        android:inputType="number" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/cum_avg_dots_txtview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/credits_completed_edit"
+        android:layout_below="@+id/credits_completed_edit"
+        android:layout_marginTop="20dp"
+        android:text="@string/cum_avg_dots"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <EditText
+        android:id="@+id/cum_avg_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cum_avg_dots_txtview"
+        android:layout_below="@+id/cum_avg_dots_txtview"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:imeOptions="flagNoFullscreen"
+        android:inputType="numberDecimal" />
+    
     <EditText
         android:id="@+id/des_avg_edittxt"
         android:layout_width="wrap_content"
@@ -34,13 +46,33 @@
         android:ems="10"
         android:inputType="numberDecimal" />
 
-    <Button
-        android:id="@+id/calcular_calculate_button"
+    <TextView
+        android:id="@+id/des_avg_txtview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/des_avg_edittxt"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
-        android:text="@string/calc" />
+        android:layout_alignLeft="@+id/cum_avg_edit"
+        android:layout_below="@+id/cum_avg_edit"
+        android:layout_marginTop="20dp"
+        android:text="@string/desired_avg"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+     <Button
+         android:id="@+id/calcular_calculate_button"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/des_avg_edittxt"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="30dp"
+         android:text="@string/calc" />
+
+     <TextView
+         android:id="@+id/credits_completed_txtview"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentTop="true"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="52dp"
+         android:text="@string/credits_comp"
+         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

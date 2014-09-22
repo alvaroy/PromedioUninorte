@@ -28,10 +28,10 @@ public class Options extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Bundle args = getArguments();
-				PA_Master pa_master = new PA_Master();
-				pa_master.setArguments(args);
+				PA_Calcular pa_calcular = new PA_Calcular();
+				pa_calcular.setArguments(args);
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-				ft.replace(R.id.main, pa_master).addToBackStack("Options").commit();
+				ft.replace(R.id.main, pa_calcular).addToBackStack("Options").commit();
 			}
 			
 		});
