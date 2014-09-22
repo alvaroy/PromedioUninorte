@@ -43,8 +43,8 @@ public class PA_Calcular extends Fragment {
 		OpenHelperManager.releaseHelper();
 		
 		if(student.getCumulative_grade() != -1.0) {
-			credits.setText(String.valueOf(student.getCumulative_grade()));
-			cum_avg.setText(String.valueOf(student.getTotal_credits()));
+			credits.setText(String.valueOf(student.getTotal_credits()));
+			cum_avg.setText(String.valueOf(student.getCumulative_grade()));
 		} 
 
 		// Button method

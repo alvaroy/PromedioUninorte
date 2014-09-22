@@ -13,16 +13,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class PM_Subject extends Fragment {
 	
 	ArrayAdapter<String> adapter;
 	ArrayList<Integer> ids = new ArrayList<Integer>();
+	Button ing;
 	ListView subject;
 	View rootView;
 	
@@ -32,6 +35,7 @@ public class PM_Subject extends Fragment {
 		//Setup fragment for usage
 		rootView = inflater.inflate(R.layout.pm_subject, container, false);
 		subject = (ListView) rootView.findViewById(R.id.subject_list);
+		ing = (Button) rootView.findViewById(R.id.add_subject_button);
 		
 		//Auto-load		
 		ArrayList<String> list = makeList();
@@ -47,6 +51,18 @@ public class PM_Subject extends Fragment {
 				Bundle args = getArguments();
 				args.putInt("ID", ids.get(position));				
 				PM_OpsSubject fragment = new PM_OpsSubject();
+				fragment.setArguments(args);
+				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+				ft.replace(R.id.main, fragment).addToBackStack("PM_Subject").commit();
+			}
+		});
+		
+		ing.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Bundle args = getArguments();
+				PM_InsSubject fragment = new PM_InsSubject();
 				fragment.setArguments(args);
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 				ft.replace(R.id.main, fragment).addToBackStack("PM_Subject").commit();

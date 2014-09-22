@@ -43,10 +43,10 @@ public class Options extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Bundle args = getArguments();
-				PM_Master pm_master = new PM_Master();
-				pm_master.setArguments(args);
+				PM_Subject pm_subject = new PM_Subject();
+				pm_subject.setArguments(args);
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-				ft.replace(R.id.main, pm_master).addToBackStack("Options").commit();
+				ft.replace(R.id.main, pm_subject).addToBackStack("Options").commit();
 			}
 		});
 		
