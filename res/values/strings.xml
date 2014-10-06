@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Promedio Uninorte</string>
+    <string name="app_name">Promedio Uninorte | Alvaro Reyes</string>
     <string name="add_student">Agregar Estudiante</string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
