@@ -85,6 +85,8 @@ public class PA_Calcular extends Fragment {
 									.beginTransaction();
 							ft.replace(R.id.main, fragment)
 									.addToBackStack("PA_Calcular").commit();
+						} else {
+							Toast.makeText(rootView.getContext(), "Los numeros tienen que estar entre 0 y 5", Toast.LENGTH_SHORT);
 						}
 					} catch (NumberFormatException e) {
 						Toast.makeText(rootView.getContext(),

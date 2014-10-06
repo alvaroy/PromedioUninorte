@@ -1,5 +1,7 @@
 package com.alvaroy.promediouninorte;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
 import com.alvaroy.promediouninorte.database.Student;
@@ -70,47 +72,10 @@ public class PA_ShowRes extends Fragment {
 					.getCredits();
 		}
 		value += cvalue;
-
-		// Student already has his desired average
-		if (value / (student.getTotal_credits() + scredits) >= getArguments()
-				.getDouble("AVG")) {
-			TextView txt = new TextView(rootView.getContext());
-			txt.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-					LayoutParams.WRAP_CONTENT));
-			txt.setText("Su promedio ya es igual o superior a la nota deseada");
-			txt.setTextSize(22);
-			line.addView(txt);
-			// Check if he can achieve his desired average
-		} else {
-			// Average is lower than desired and no credits available
-			if (free == 0) {
-				TextView txt = new TextView(rootView.getContext());
-				txt.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT));
-				txt.setText("No hay posibilidad de que su promedio llegue a la nota deseada con sus notas actuales");
-				txt.setTextSize(22);
-				line.addView(txt);
-			} else {
-				double need = ((getArguments().getDouble("AVG") * (student
-						.getTotal_credits() + scredits)) - value);
-				// No chance of getting the desired average
-				if (need > (free * 5)) {
-					TextView txt = new TextView(rootView.getContext());
-					txt.setText("No hay posibilidad de que su promedio llegue a la nota deseada con sus notas actuales");
-					txt.setLayoutParams(new LayoutParams(
-							LayoutParams.WRAP_CONTENT,
-							LayoutParams.WRAP_CONTENT));
-					txt.setTextSize(22);
-					line.addView(txt);
-					// Possible to get
-				} else {
-					addHeaders();
-					need = need / free;
-					fillRows(stusubL, need, stusubDAO, subjectDAO);
-				}
-			}
-		}
-
+		double need = ((getArguments().getDouble("AVG") * (student.getTotal_credits() + scredits)) - value);
+		addHeaders();
+		need = round(need / free, 2);
+		fillRows(stusubL, need, stusubDAO, subjectDAO);
 		OpenHelperManager.releaseHelper();
 		return rootView;
 	}
@@ -162,6 +127,13 @@ public class PA_ShowRes extends Fragment {
 			tr.addView(gradetxt);
 			table.addView(tr);
 		}
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 
 }

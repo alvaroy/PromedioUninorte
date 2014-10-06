@@ -1,5 +1,7 @@
 package com.alvaroy.promediouninorte;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
 import com.alvaroy.promediouninorte.database.Grade;
@@ -51,42 +53,9 @@ public class PM_ResSubject extends Fragment {
 				pct += grade.getPercentage();
 			}
 		}
-		//Check if student already has the desired average
-		if (total >= des) {			
-			TextView txt = new TextView(rootView.getContext());
-			txt.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-					LayoutParams.WRAP_CONTENT));
-			txt.setText("Su promedio ya es igual o superior a la nota deseada");			
-			txt.setTextSize(22);
-			line.addView(txt);
-		//Check if he still can get the desired average
-		} else {
-			//No possibility of getting the desired average
-			if(pct == 0) {
-				TextView txt = new TextView(rootView.getContext());
-				txt.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-						LayoutParams.WRAP_CONTENT));
-				txt.setText("No hay posibilidad de que su promedio llegue a la nota deseada con sus notas actuales");				
-				txt.setTextSize(22);
-				line.addView(txt);
-			//Still possible to get the desired average	
-			} else {
-				double need = (des - total) * 100 / pct;
-				//Calculations don't give a realistic number
-				if (need < 0.0 || need > 5.0) {
-					TextView txt = new TextView(rootView.getContext());
-					txt.setText("No hay posibilidad de que su promedio llegue a la nota deseada con sus notas actuales");
-					txt.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
-							LayoutParams.WRAP_CONTENT));
-					txt.setTextSize(22);					
-					line.addView(txt);
-				//It IS possible to get the student desired grade going by calculations
-				} else {
-					addHeaders();
-					fillRows(grades, need);
-				}				
-			}
-		}
+		double need = (des - total) * 100 / pct;
+		addHeaders();
+		fillRows(grades, round(need, 2));
 		return rootView;
 	}
 	
@@ -135,6 +104,13 @@ public class PM_ResSubject extends Fragment {
 			tr.addView(gradetxt);
 			table.addView(tr);
 		}
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 
 }
