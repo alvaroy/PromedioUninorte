@@ -5,7 +5,6 @@ import java.util.List;
 import com.alvaroy.promediouninorte.database.DatabaseHelper;
 import com.alvaroy.promediouninorte.database.Student;
 import com.alvaroy.promediouninorte.database.StudentSubject;
-import com.alvaroy.promediouninorte.database.Subject;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import android.os.Bundle;
@@ -38,9 +37,9 @@ public class PM_Subject extends Fragment {
 		ing = (Button) rootView.findViewById(R.id.add_subject_button);
 		
 		//Auto-load		
-		ArrayList<String> list = makeList();
-		adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_list_item_1, list);		
-		subject.setAdapter(adapter);
+		makeList();
+		AdapterAdapter adapt = new AdapterAdapter(rootView.getContext(), ids);
+		subject.setAdapter(adapt);
 		
 		//ListView method to change fragment
 		subject.setOnItemClickListener(new OnItemClickListener() {
@@ -72,20 +71,16 @@ public class PM_Subject extends Fragment {
 		return rootView;
 	}
 	
-	private ArrayList<String> makeList() {
-		ArrayList<String> list = new ArrayList<String>();
+	private void makeList() {
 		ids.clear();
 		DatabaseHelper helper = OpenHelperManager.getHelper(rootView.getContext(), DatabaseHelper.class);
 		RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
-		RuntimeExceptionDao<Subject, Integer> subjectDAO = helper.getSubjectRuntimeDAO();
 		RuntimeExceptionDao<StudentSubject, Integer> stusubDAO = helper.getStusubRuntimeDAO();
 		List<StudentSubject> names = stusubDAO.queryForEq("student_id", studentDAO.queryForEq("user", getArguments().getString("Username")).get(0).getId());
 		for (StudentSubject stusub : names) {
-			list.add(subjectDAO.queryForId(stusub.getSubject().getId()).getName());
 			ids.add(stusub.getId());			
 		}
 		OpenHelperManager.releaseHelper();
-		return list;
 	}
 
 }
