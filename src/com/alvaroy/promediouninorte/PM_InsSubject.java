@@ -92,6 +92,7 @@ public class PM_InsSubject extends Fragment {
 						RuntimeExceptionDao<Student, Integer> studentDAO = helper.getStudentRuntimeDAO();
 						RuntimeExceptionDao<Subject, Integer> subjectDAO = helper.getSubjectRuntimeDAO();
 						RuntimeExceptionDao<StudentSubject, Integer> stusubDAO = helper.getStusubRuntimeDAO();
+						RuntimeExceptionDao<Grade, Integer> gradeDAO = helper.getGradeRuntimeDAO();
 						Subject subject = new Subject(nametxt, Integer.parseInt(creditstxt), Integer.parseInt(gradestxt));	
 						if(subjectDAO.queryForMatching(subject).isEmpty()) {
 							subjectDAO.create(subject);
@@ -103,7 +104,22 @@ public class PM_InsSubject extends Fragment {
 							.eq("subject_id", stusub.getSubject().getId());
 						if(stusubDAO.query(query.prepare()).isEmpty()) {
 							stusubDAO.create(stusub);
-							
+							//..........................//
+							try {
+								JSONArray jsonPosts = mData.getJSONArray("notas");
+								for (int i = 0;i< jsonPosts.length();i++){
+									JSONObject post = jsonPosts.getJSONObject(i);
+									String title = post.getString("curso_nombre");
+									title  = Html.fromHtml(title).toString();										
+									if(name.getSelectedItem().toString().equals(title)) {
+										gradeDAO.create(new Grade(Html.fromHtml(post.getString("nota_nombre")).toString(), 
+												post.getDouble("nota_porcentaje"), 
+												stusub));
+									}	
+								}
+							} catch (JSONException e) {
+							}
+							//..........................//
 							OpenHelperManager.releaseHelper();
 							getActivity().getSupportFragmentManager().popBackStack();
 						} 
