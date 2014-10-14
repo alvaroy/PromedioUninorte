@@ -210,9 +210,11 @@ public class PM_EditSubject extends Fragment {
 			EditText name = new EditText(rootView.getContext());
 			name.setInputType(InputType.TYPE_CLASS_TEXT
 					| InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+			name.setKeyListener(null);
 			EditText pct = new EditText(rootView.getContext());
 			pct.setInputType(InputType.TYPE_CLASS_NUMBER
 					| InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			pct.setKeyListener(null);
 			EditText grade = new EditText(rootView.getContext());
 			grade.setInputType(InputType.TYPE_CLASS_NUMBER
 					| InputType.TYPE_NUMBER_FLAG_DECIMAL);

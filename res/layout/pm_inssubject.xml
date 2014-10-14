@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
+    <Spinner
         android:id="@+id/mat_name_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/mat_name_txt"
+        android:layout_alignRight="@+id/mat_name_txt"
         android:layout_below="@+id/mat_name_txt"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:imeOptions="flagNoFullscreen"
-        android:inputType="text" >
+        android:inputType="text"
+        tools:listitem="@android:layout/simple_spinner_dropdown_item" >
 
         <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/credits_done_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/mat_name_edit"
-        android:layout_below="@+id/mat_name_edit"
-        android:layout_marginTop="20dp"
-        android:text="@string/subject_credits"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    </Spinner>
 
     <EditText
         android:id="@+id/credits_done_edit"
@@ -48,7 +41,8 @@
         android:layout_below="@+id/credits_done_edit"
         android:layout_marginTop="20dp"
         android:text="@string/num_grades"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/grades_totel_edit"
@@ -59,7 +53,18 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:imeOptions="flagNoFullscreen"
-        android:inputType="number" />
+        android:inputType="number"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/credits_done_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mat_name_edit"
+        android:layout_below="@+id/mat_name_edit"
+        android:layout_marginTop="20dp"
+        android:text="@string/subject_credits"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/mat_name_txt"
@@ -68,7 +73,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="90dp"
         android:text="@string/name_subject"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -76,9 +81,9 @@
         android:id="@+id/pm_inssubject_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/grades_totel_edit"
+        android:layout_below="@+id/credits_done_edit"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="70dp"
         android:text="@string/save" />
 
 </RelativeLayout>
