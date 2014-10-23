@@ -1,14 +1,24 @@
 package com.alvaroy.promediouninorte;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +53,7 @@ import android.widget.Toast;
 
 public class PM_InsSubject extends Fragment {
 
+	String TAG = getTag();
 	Spinner name;
 	EditText credits;
 	EditText grades;
@@ -106,15 +117,21 @@ public class PM_InsSubject extends Fragment {
 							stusubDAO.create(stusub);
 							//..........................//
 							try {
-								JSONArray jsonPosts = mData.getJSONArray("notas");
+								JSONArray jsonPosts = mData.getJSONArray("materias");
 								for (int i = 0;i< jsonPosts.length();i++){
 									JSONObject post = jsonPosts.getJSONObject(i);
-									String title = post.getString("curso_nombre");
-									title  = Html.fromHtml(title).toString();										
-									if(name.getSelectedItem().toString().equals(title)) {
-										gradeDAO.create(new Grade(Html.fromHtml(post.getString("nota_nombre")).toString(), 
-												post.getDouble("nota_porcentaje"), 
-												stusub));
+									String title = post.getString("nombre_materia");
+									title  = Html.fromHtml(title).toString();
+									String periodo = post.getString("periodo");
+									periodo = Html.fromHtml(periodo).toString();
+									if(name.getSelectedItem().toString().equals(title+"_"+periodo)) {
+										JSONArray grades = post.getJSONArray("componetes");
+										for (int j = 0; j < grades.length(); j++) {
+											JSONObject grade = grades.getJSONObject(j);
+											gradeDAO.create(new Grade(Html.fromHtml(grade.getString("desc")).toString(), 
+													grade.getDouble("peso"), 
+													stusub));
+										}										
 									}	
 								}
 							} catch (JSONException e) {
@@ -177,37 +194,43 @@ public class PM_InsSubject extends Fragment {
 
 		@Override
 		protected JSONObject doInBackground(Object... params) {
-			int responseCode = -1;
-			JSONObject jsonResponse = null;
-			try {
-				URL blogFeedUsr = new URL(
-						"http://ylang-ylang.uninorte.edu.co:8080/promedioapp/read.php");
-				HttpURLConnection connection = (HttpURLConnection) blogFeedUsr
-						.openConnection();
-				connection.connect();
-
-				responseCode = connection.getResponseCode();
-
-				if (responseCode == HttpURLConnection.HTTP_OK) {
-					InputStream inputStram = connection.getInputStream();
-					Reader reader = new InputStreamReader(inputStram);
-					char[] charArray = new char[connection.getContentLength()];
-					reader.read(charArray);
-					String responseData = new String(charArray);
-					jsonResponse = new JSONObject(responseData);
-				} else {
-					/*Log.i(TAG,
-							"Response code unsuccesfull "
-									+ String.valueOf(responseCode));*/
-				}
-			} catch (MalformedURLException e) {
-				//Log.e(TAG, "Exception", e);
-			} catch (IOException e) {
-				//Log.e(TAG, "Exception", e);
-			} catch (Exception e) {
-				//Log.e(TAG, "Exception", e);
+			InputStream is = null;
+			String result = "";
+			JSONObject jsonObject = null;
+			
+			// HTTP
+			try {	    	
+				HttpClient httpclient = new DefaultHttpClient(); // for port 80 requests!
+				HttpGet httppost = new HttpGet("http://augustodesarrollador.com/promedio_app/read.php");
+				HttpResponse response = httpclient.execute(httppost);
+				HttpEntity entity = response.getEntity();
+				is = entity.getContent();
+			} catch(Exception e) {
+				return null;
 			}
-			return jsonResponse;
+		    
+			// Read response to string
+			try {	    	
+				BufferedReader reader = new BufferedReader(new InputStreamReader(is,"utf-8"),8);
+				StringBuilder sb = new StringBuilder();
+				String line = null;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line + "\n");
+				}
+				is.close();
+				result = sb.toString();	            
+			} catch(Exception e) {
+				return null;
+			}
+	 
+			// Convert string to object
+			try {
+				jsonObject = new JSONObject(result);            
+			} catch(JSONException e) {
+				return null;
+			}
+	    
+			return jsonObject;
 		}
 
 		@Override
@@ -229,17 +252,17 @@ public class PM_InsSubject extends Fragment {
 		} else {
 			try {
 				mCount = new ArrayList<Integer>();
-				JSONArray jsonPosts = mData.getJSONArray("notas");
+				JSONArray jsonPosts = mData.getJSONArray("materias");
 				ArrayList<String> blogPosts = new ArrayList<String>();
 				for (int i = 0;i< jsonPosts.length();i++){
 					JSONObject post = jsonPosts.getJSONObject(i);
-					String title = post.getString("curso_nombre");
-					title  = Html.fromHtml(title).toString();	
-					if(!blogPosts.contains(title)) {
-						blogPosts.add(title);
-					}	
+					String title = post.getString("nombre_materia");
+					title  = Html.fromHtml(title).toString();
+					String periodo = post.getString("periodo");
+					periodo = Html.fromHtml(periodo).toString();
+					blogPosts.add(title+"_"+periodo);
+					mCount.add(post.getJSONArray("componetes").length());
 				}
-				mCount.add(mData.getInt("count"));
 				ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, blogPosts);
 			    name.setAdapter(adapter);
 			    if(adapter.getCount() > 0) {
@@ -247,7 +270,7 @@ public class PM_InsSubject extends Fragment {
 			    }			    
 				save.setEnabled(true);
 			} catch (JSONException e) {
-				//Log.e(TAG,"Exception caught!",e);
+				Log.e(TAG,"Exception caught!",e);
 			}
 		}
 	}
